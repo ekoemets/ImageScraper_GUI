@@ -26,11 +26,16 @@ public class Satted {
     }
 
     private static File leiaSäteteFail(String nimi) throws FileNotFoundException{
+        String failitee = leiaSäteteFailitee(nimi);
+        File fail = new File(failitee);
+        return fail;
+    }
+
+    public static String  leiaSäteteFailitee(String nimi) throws FileNotFoundException{
         URL failitee = ClassLoader.getSystemClassLoader().getResource(nimi);
         if(failitee == null){
             throw new FileNotFoundException("Ei leidnud sätete faili \"" +  nimi + '"');
         }
-        File fail = new File(failitee.getPath());
-        return fail;
+        return failitee.getPath();
     }
 }
