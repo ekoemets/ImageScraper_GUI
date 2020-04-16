@@ -1,0 +1,11 @@
+.root{
+    -fx-font-size: 15px;
+    -fx-font-family: sans-serif;
+}
+
+.text-field{
+    -fx-border-color: #a3a3a3;
+    -fx-border-style: solid;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}

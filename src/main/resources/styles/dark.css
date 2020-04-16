@@ -1,0 +1,16 @@
+.root{
+    -fx-font-size: 15px;
+    -fx-font-family: sans-serif;
+    -fx-background-color: #424242;
+}
+
+.label{
+    -fx-text-fill: #e3e3e3;
+}
+
+.text-field{
+  -fx-border-width:1px;
+  -fx-border-style: solid;
+  -fx-border-color: white;
+  -fx-control-inner-background: #575656;
+}
