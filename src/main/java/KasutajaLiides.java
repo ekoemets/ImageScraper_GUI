@@ -2,7 +2,11 @@ import ImageScraper.VeebiKlient;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -35,17 +39,19 @@ public class KasutajaLiides extends Application {
 
 
         hetkeVaade = 0;
-        VBox vaateHoidja = new VBox();
+        BorderPane vaateHoidja = new BorderPane();
         vaateHoidja.setPadding(new Insets(PADDING));
         vaateHoidja.getStylesheets().add(stiil);
 
         Scene stseen = new Scene(vaateHoidja, aknaKõrgus, aknaLaius);
-        vaated = new Pane[]{new VeebileheVaade(klient, stseen.heightProperty(), stseen.widthProperty())};
+        vaated = new Pane[]{new VeebileheVaade(klient)};
 
-        vaateHoidja.getChildren().add(vaated[hetkeVaade]);
+        vaateHoidja.setCenter(vaated[hetkeVaade]);
 
+        BorderPane menüüNupud = new MenüüNupud();
+        vaateHoidja.setBottom(menüüNupud);
 
-        pealava.setOnCloseRequest(e -> klient.close());
+        pealava.setOnCloseRequest(e -> klient.quit());
         pealava.setScene(stseen);
         pealava.show();
 
@@ -54,6 +60,7 @@ public class KasutajaLiides extends Application {
 
     @Override
     public void stop(){
+        System.out.println("Stop was called");
         klient.quit();
     }
 }
