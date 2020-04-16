@@ -1,14 +1,12 @@
+package GUI;
+
 import ImageScraper.VeebiKlient;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,7 +27,7 @@ public class KasutajaLiides extends Application {
         Properties eelistused = Satted.loeSätted("app.properties");
         int aknaKõrgus = Integer.parseInt(eelistused.getProperty("aken.korgus"));
         int aknaLaius = Integer.parseInt(eelistused.getProperty("aken.laius"));
-        String stiil = this.getClass().getResource(eelistused.getProperty("stiil")).toExternalForm();
+        String stiil = ClassLoader.getSystemClassLoader().getResource(eelistused.getProperty("stiil")).toExternalForm();
 
         //Käivitame veebikliendi
         System.setProperty("webdriver.chrome.silentOutput", "true");                     // peidab kasutaja jaoks ebaolulise info

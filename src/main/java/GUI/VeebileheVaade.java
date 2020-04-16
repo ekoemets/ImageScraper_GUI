@@ -1,3 +1,5 @@
+package GUI;
+
 import ImageScraper.VeebiKlient;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
