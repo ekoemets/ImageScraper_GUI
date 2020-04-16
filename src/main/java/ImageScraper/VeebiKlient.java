@@ -1,3 +1,5 @@
+package ImageScraper;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -81,11 +83,15 @@ public class VeebiKlient extends ChromeDriver {
                 "return Math.max( body.scrollHeight, body.offsetHeight," +
                 "                 html.clientHeight, html.scrollHeight, html.offsetHeight );")).intValue();
         Dimension aknaSuurus = this.manage().window().getSize();
+        if(leheKõrgus > 5000){
+            leheKõrgus = 5000;
+        }
         if(aknaSuurus.getHeight() < leheKõrgus){
             this.manage().window().setSize(new Dimension(aknaSuurus.getWidth(), leheKõrgus));
 
         }
         BufferedImage terveLeht = teeAknaPilt();
+        System.out.println(this.manage().window().getSize());
         this.manage().window().setSize(aknaSuurus);  // aknatõmmis on tehtud, nüüd seab brauseriakna suuruse tagasi tavaliseks
         return terveLeht;
     }

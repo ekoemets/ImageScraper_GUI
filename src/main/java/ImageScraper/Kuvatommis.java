@@ -1,3 +1,5 @@
+package ImageScraper;
+
 import org.openqa.selenium.WebElement;
 import java.awt.image.BufferedImage;
 
