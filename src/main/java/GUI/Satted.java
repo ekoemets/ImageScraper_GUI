@@ -1,3 +1,5 @@
+package GUI;
+
 import java.io.*;
 import java.net.URL;
 import java.util.Properties;
@@ -6,8 +8,8 @@ public class Satted {
     public static Properties loeSätted(String nimi) throws IOException {
         File säteteFail = leiaSäteteFail(nimi);
         Properties sätted = new Properties();
-        try {
-            sätted.load(new FileInputStream(säteteFail));
+        try (FileInputStream sättevoog = new FileInputStream(säteteFail)){
+            sätted.load(sättevoog);
         } catch (IOException e) {
             throw new IOException("Ei saanud sätete faili \"" + nimi + "\" lugeda.");
         }

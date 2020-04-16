@@ -1,3 +1,5 @@
+package GUI;
+
 import ImageScraper.VeebiKlient;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.embed.swing.SwingFXUtils;

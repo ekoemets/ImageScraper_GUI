@@ -25,11 +25,15 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.30'
 }
 
+application {
+	mainClassName = 'GUI.KasutajaLiides'
+}
+
 task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': project.name,
                 'Implementation-Version': version,
-                'Main-Class': 'Main',
+                'Main-Class': 'KasutajaLiides',
                 'Class-Path': '.'
     }
     baseName = project.name

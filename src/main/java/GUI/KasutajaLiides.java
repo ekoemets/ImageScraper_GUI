@@ -1,3 +1,5 @@
+package GUI;
+
 import ImageScraper.VeebiKlient;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import javafx.application.Application;
