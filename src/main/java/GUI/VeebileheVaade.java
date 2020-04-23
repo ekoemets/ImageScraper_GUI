@@ -6,6 +6,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,7 +19,7 @@ public class VeebileheVaade extends BorderPane {
     private VeebiKlient klient;
     HBox sisend;
 
-    public VeebileheVaade(VeebiKlient klient){
+    public VeebileheVaade(VeebiKlient klient, MenüüNupud menüüNupud){
         this.klient = klient;
 
         Label veebilehtTekst = new Label("Veebileht");
@@ -28,11 +29,13 @@ public class VeebileheVaade extends BorderPane {
         this.sisend = new HBox(15, veebilehtTekst, veebileheAadress, otsiNupp);
         this.sisend.setAlignment(Pos.CENTER);
 
-
         Text eelvaateTekst = new Text("Eelvaade");
+
         otsiNupp.setOnMouseClicked(mouseEvent -> {
+            menüüNupud.lülita();
+            ProgressBar olek = new ProgressBar(-1);
             Text laadimine = new Text("Laen eelvaadet.");
-            this.setCenter(laadimine);
+            this.setCenter(olek);
             double eelvaateKõrgus = (this.getHeight() - sisend.getHeight()) * 0.9;
             double eelvaateLaius = this.getWidth() * 0.9;
 
@@ -43,6 +46,7 @@ public class VeebileheVaade extends BorderPane {
             BorderPane pane = this;
             Thread veebileht = new Thread(() ->
             {
+
                 klient.get(veebileheAadress.getText());
                 Image piltLehest = null;
                 try {
@@ -52,6 +56,8 @@ public class VeebileheVaade extends BorderPane {
 
                 } catch (IOException e) {
                     Platform.runLater(() -> pane.setCenter(new Text("Viga, proovi uuesti!")));
+                }finally {
+                    Platform.runLater(() -> menüüNupud.lülita());
                 }
             });
             veebileht.start();

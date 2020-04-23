@@ -91,7 +91,6 @@ public class VeebiKlient extends ChromeDriver {
 
         }
         BufferedImage terveLeht = teeAknaPilt();
-        System.out.println(this.manage().window().getSize());
         this.manage().window().setSize(aknaSuurus);  // aknatõmmis on tehtud, nüüd seab brauseriakna suuruse tagasi tavaliseks
         return terveLeht;
     }

@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,8 +17,6 @@ import java.util.logging.Level;
 public class KasutajaLiides extends Application {
 
     private final static int PADDING = 20;
-    private Pane[] vaated;
-    private int hetkeVaade;
     VeebiKlient klient;
 
     @Override
@@ -35,24 +34,27 @@ public class KasutajaLiides extends Application {
         WebDriverManager.chromedriver().setup();                                         //Tõmbab vajadusel alla chromedriveri kui seda ei eksisteeri
         klient = new VeebiKlient();
 
+        //Peavaade, kuhu sisse pannakse kõik ülejäänud elemendid.
+        BorderPane peaVaade = new BorderPane();
+        peaVaade.setPadding(new Insets(PADDING));
+        peaVaade.getStylesheets().add(stiil);
 
-        hetkeVaade = 0;
-        BorderPane vaateHoidja = new BorderPane();
-        vaateHoidja.setPadding(new Insets(PADDING));
-        vaateHoidja.getStylesheets().add(stiil);
+        //Haldab järjestikuste vaadete vahetamist
+        VaateHaldur vaateHaldur = new VaateHaldur(peaVaade);
 
-        Scene stseen = new Scene(vaateHoidja, aknaKõrgus, aknaLaius);
-        vaated = new Pane[]{new VeebileheVaade(klient)};
+        //Vaadete vahel navigeermiseks nupud
+        MenüüNupud menüüNupud = new MenüüNupud(vaateHaldur);
+        peaVaade.setBottom(menüüNupud);
 
-        vaateHoidja.setCenter(vaated[hetkeVaade]);
+        //Vaated, mille vahel haldur vahetab
+        Pane[] vaated = new Pane[]{new VeebileheVaade(klient, menüüNupud), new VeebileheVaade(klient, menüüNupud)};
+        vaateHaldur.setVaated(vaated);
 
-        BorderPane menüüNupud = new MenüüNupud();
-        vaateHoidja.setBottom(menüüNupud);
+        Scene stseen = new Scene(peaVaade, aknaKõrgus, aknaLaius);
 
         pealava.setOnCloseRequest(e -> klient.quit());
         pealava.setScene(stseen);
         pealava.show();
-
 
     }
 
