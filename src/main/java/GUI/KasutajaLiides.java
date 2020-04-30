@@ -38,6 +38,7 @@ public class KasutajaLiides extends Application {
         BorderPane peaVaade = new BorderPane();
         peaVaade.setPadding(new Insets(PADDING));
         peaVaade.getStylesheets().add(stiil);
+        KasutajaLiides.setUserAgentStylesheet(stiil);
 
         //Haldab järjestikuste vaadete vahetamist
         VaateHaldur vaateHaldur = new VaateHaldur(peaVaade);
@@ -53,6 +54,7 @@ public class KasutajaLiides extends Application {
         Scene stseen = new Scene(peaVaade, aknaKõrgus, aknaLaius);
 
         pealava.setOnCloseRequest(e -> klient.quit());
+        pealava.setTitle("ImageScraper");
         pealava.setScene(stseen);
         pealava.show();
 

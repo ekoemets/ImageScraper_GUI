@@ -13,6 +13,8 @@ repositories {
     mavenCentral()
 }
 
+compileJava.options.encoding = 'UTF-8'
+
 javafx {
     modules = ['javafx.controls', 'javafx.fxml', 'javafx.swing']
 }

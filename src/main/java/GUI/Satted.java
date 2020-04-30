@@ -27,8 +27,7 @@ public class Satted {
 
     private static File leiaSäteteFail(String nimi) throws FileNotFoundException{
         String failitee = leiaSäteteFailitee(nimi);
-        File fail = new File(failitee);
-        return fail;
+        return new File(failitee);
     }
 
     public static String  leiaSäteteFailitee(String nimi) throws FileNotFoundException{

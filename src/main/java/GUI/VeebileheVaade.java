@@ -24,6 +24,7 @@ public class VeebileheVaade extends BorderPane {
 
         Label veebilehtTekst = new Label("Veebileht");
         TextField veebileheAadress = new TextField("");
+        veebileheAadress.setPromptText("Kirjuta siia veebilehe aadress");
         HBox.setHgrow(veebileheAadress, Priority.ALWAYS);
         Button otsiNupp = new Button("Otsi");
         this.sisend = new HBox(15, veebilehtTekst, veebileheAadress, otsiNupp);
@@ -32,35 +33,37 @@ public class VeebileheVaade extends BorderPane {
         Text eelvaateTekst = new Text("Eelvaade");
 
         otsiNupp.setOnMouseClicked(mouseEvent -> {
-            menüüNupud.lülita();
-            ProgressBar olek = new ProgressBar(-1);
-            Text laadimine = new Text("Laen eelvaadet.");
-            this.setCenter(olek);
-            double eelvaateKõrgus = (this.getHeight() - sisend.getHeight()) * 0.9;
-            double eelvaateLaius = this.getWidth() * 0.9;
+            if (!veebileheAadress.getText().isEmpty()) {
+                menüüNupud.lülita();
+                ProgressBar olek = new ProgressBar(-1);
+                Text laadimine = new Text("Laen eelvaadet.");
+                this.setCenter(olek);
+                double eelvaateKõrgus = (this.getHeight() - sisend.getHeight()) * 0.9;
+                double eelvaateLaius = this.getWidth() * 0.9;
 
-            ImageView eelvaade = new ImageView();
-            eelvaade.setFitHeight(eelvaateKõrgus);
-            eelvaade.setFitWidth(eelvaateLaius);
+                ImageView eelvaade = new ImageView();
+                eelvaade.setFitHeight(eelvaateKõrgus);
+                eelvaade.setFitWidth(eelvaateLaius);
 
-            BorderPane pane = this;
-            Thread veebileht = new Thread(() ->
-            {
+                BorderPane pane = this;
+                Thread veebileht = new Thread(() ->
+                {
 
-                klient.get(veebileheAadress.getText());
-                Image piltLehest = null;
-                try {
-                    piltLehest = SwingFXUtils.toFXImage(klient.teeLehePilt(), null);
-                    eelvaade.setImage(piltLehest);
-                    Platform.runLater(() -> pane.setCenter(eelvaade));
+                    klient.get(veebileheAadress.getText());
+                    Image piltLehest = null;
+                    try {
+                        piltLehest = SwingFXUtils.toFXImage(klient.teeLehePilt(), null);
+                        eelvaade.setImage(piltLehest);
+                        Platform.runLater(() -> pane.setCenter(eelvaade));
 
-                } catch (IOException e) {
-                    Platform.runLater(() -> pane.setCenter(new Text("Viga, proovi uuesti!")));
-                }finally {
-                    Platform.runLater(() -> menüüNupud.lülita());
-                }
-            });
-            veebileht.start();
+                    } catch (IOException e) {
+                        Platform.runLater(() -> pane.setCenter(new Text("Viga, proovi uuesti!")));
+                    } finally {
+                        Platform.runLater(() -> menüüNupud.lülita());
+                    }
+                });
+                veebileht.start();
+            }
         });
 
         this.setTop(sisend);
