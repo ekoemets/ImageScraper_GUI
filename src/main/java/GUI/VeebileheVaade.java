@@ -2,12 +2,12 @@ package GUI;
 
 import ImageScraper.VeebiKlient;
 import javafx.application.Platform;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.property.DoubleProperty;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.Group;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -35,15 +35,16 @@ public class VeebileheVaade extends BorderPane {
         otsiNupp.setOnMouseClicked(mouseEvent -> {
             if (!veebileheAadress.getText().isEmpty()) {
                 menüüNupud.lülita();
-                ProgressBar olek = new ProgressBar(-1);
-                Text laadimine = new Text("Laen eelvaadet.");
+
+                ProgressIndicator olek = new ProgressIndicator(-1);
+                //Text laadimine = new Text("Laen eelvaadet.");
                 this.setCenter(olek);
-                double eelvaateKõrgus = (this.getHeight() - sisend.getHeight()) * 0.9;
-                double eelvaateLaius = this.getWidth() * 0.9;
+                DoubleBinding eelvaateKõrgus = (heightProperty().subtract(sisend.heightProperty())).multiply(0.9);
+                DoubleBinding eelvaateLaius = widthProperty().multiply( 0.9);
 
                 ImageView eelvaade = new ImageView();
-                eelvaade.setFitHeight(eelvaateKõrgus);
-                eelvaade.setFitWidth(eelvaateLaius);
+                eelvaade.fitHeightProperty().bind(eelvaateKõrgus);
+                eelvaade.fitWidthProperty().bind(eelvaateLaius);
 
                 BorderPane pane = this;
                 Thread veebileht = new Thread(() ->

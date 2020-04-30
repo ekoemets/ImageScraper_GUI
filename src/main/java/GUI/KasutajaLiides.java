@@ -1,6 +1,7 @@
 package GUI;
 
 import ImageScraper.VeebiKlient;
+import com.sun.javafx.css.StyleManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -8,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,18 +28,18 @@ public class KasutajaLiides extends Application {
         int aknaKõrgus = Integer.parseInt(eelistused.getProperty("aken.korgus"));
         int aknaLaius = Integer.parseInt(eelistused.getProperty("aken.laius"));
         String stiil = ClassLoader.getSystemClassLoader().getResource(eelistused.getProperty("stiil")).toExternalForm();
+        Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
+        StyleManager.getInstance().addUserAgentStylesheet(stiil);
 
         //Käivitame veebikliendi
-        System.setProperty("webdriver.chrome.silentOutput", "true");                     // peidab kasutaja jaoks ebaolulise info
+        System.setProperty("webdriver.chrome.silentOutput", "true");                        // peidab kasutaja jaoks ebaolulise info
         java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);   // Ei tekita üleliigset logi
-        WebDriverManager.chromedriver().setup();                                         //Tõmbab vajadusel alla chromedriveri kui seda ei eksisteeri
+        WebDriverManager.chromedriver().setup();                                            //Tõmbab vajadusel alla chromedriveri kui seda ei eksisteeri
         klient = new VeebiKlient();
 
         //Peavaade, kuhu sisse pannakse kõik ülejäänud elemendid.
         BorderPane peaVaade = new BorderPane();
         peaVaade.setPadding(new Insets(PADDING));
-        peaVaade.getStylesheets().add(stiil);
-        KasutajaLiides.setUserAgentStylesheet(stiil);
 
         //Haldab järjestikuste vaadete vahetamist
         VaateHaldur vaateHaldur = new VaateHaldur(peaVaade);

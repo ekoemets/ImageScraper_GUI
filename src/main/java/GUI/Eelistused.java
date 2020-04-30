@@ -1,5 +1,7 @@
 package GUI;
 
+import com.sun.javafx.css.StyleManager;
+import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -58,8 +60,8 @@ public class Eelistused {
         asetus.add(stiiliValik,1,2);
 
         // stiilivaliku navigeerimise nupud
-        Button jargmine = new Button(" > ");
-        Button eelmine = new Button(" < ");
+        Button jargmine = new Button(">");
+        Button eelmine = new Button("<");
 
         //stiiliga seotud väli
         HBox stiiliRida = new HBox(10,eelmine,jargmine);
@@ -75,7 +77,7 @@ public class Eelistused {
         salvestaNupp.setOnMouseClicked(mouseEvent -> {
             seaded.setProperty("aken.laius",laiusTekst.getText());
             seaded.setProperty("aken.korgus",korgusTekst.getText());
-            seaded.setProperty("stiil", stiiliValik.getText());
+            seaded.setProperty("stiil", "styles/" + stiiliValik.getText());
             try {
                 Satted.salvestaSätted(seaded, "app.properties");
             } catch (IOException e){
@@ -97,12 +99,13 @@ public class Eelistused {
     }
 
     private static void vahetaStiili(Label stiiliValik){
+        Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
         if (stiiliValik.getText().equals("hele")){
             stiiliValik.setText("tume");
-            KasutajaLiides.setUserAgentStylesheet(ClassLoader.getSystemClassLoader().getResource("styles/tume.css").toExternalForm());
+            StyleManager.getInstance().addUserAgentStylesheet(ClassLoader.getSystemClassLoader().getResource("styles/tume.css").toString());
         } else {
             stiiliValik.setText("hele");
-            KasutajaLiides.setUserAgentStylesheet(ClassLoader.getSystemClassLoader().getResource("styles/hele.css").toExternalForm());
+            StyleManager.getInstance().addUserAgentStylesheet(ClassLoader.getSystemClassLoader().getResource("styles/hele.css").toString());
 
         }
     }
