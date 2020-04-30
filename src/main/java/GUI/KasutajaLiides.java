@@ -5,6 +5,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -48,7 +49,7 @@ public class KasutajaLiides extends Application {
         peaVaade.setBottom(menüüNupud);
 
         //Vaated, mille vahel haldur vahetab
-        Pane[] vaated = new Pane[]{new VeebileheVaade(klient, menüüNupud), new VeebileheVaade(klient, menüüNupud)};
+        Pane[] vaated = new Pane[]{new VeebileheVaade(klient, menüüNupud), new InfoVaade(klient)};
         vaateHaldur.setVaated(vaated);
 
         Scene stseen = new Scene(peaVaade, aknaKõrgus, aknaLaius);
