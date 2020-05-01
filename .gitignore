@@ -1,6 +1,7 @@
 .gradle
 /build/
 .idea
+.imagescraper
 
 # Ignore Gradle GUI config
 gradle-app.setting

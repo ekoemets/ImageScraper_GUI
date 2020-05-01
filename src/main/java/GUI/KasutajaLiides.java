@@ -45,8 +45,11 @@ public class KasutajaLiides extends Application {
         MenüüNupud menüüNupud = new MenüüNupud(vaateHaldur);
         peaVaade.setBottom(menüüNupud);
 
+        //Infovaate paneel
+        InfoVaade infoVaade = new InfoVaade(klient,pealava);
+
         //Vaated, mille vahel haldur vahetab
-        Pane[] vaated = new Pane[]{new VeebileheVaade(klient, menüüNupud), new InfoVaade(klient)};
+        Pane[] vaated = new Pane[]{new VeebileheVaade(klient, menüüNupud), infoVaade};
         vaateHaldur.setVaated(vaated);
 
         Scene stseen = new Scene(peaVaade, aknaKõrgus, aknaLaius);

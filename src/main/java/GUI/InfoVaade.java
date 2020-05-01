@@ -89,6 +89,7 @@ public class InfoVaade extends BorderPane {
                 ErrorScreen.tooEsile("\nPalun vali element!");
                 return;
             }
+
         });
         tolkimiseRiba.getChildren().addAll(EELMINE, JARGMINE,valmisNupp);
 

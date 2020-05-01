@@ -92,7 +92,7 @@ public class Eelistused {
         asetus.add(sulgeNupp, 0,6);
 
 
-        Scene stseen = new Scene(asetus,250,250);
+        Scene stseen = new Scene(asetus,300,250);
 
         eelistused.setScene(stseen);
         eelistused.show();
