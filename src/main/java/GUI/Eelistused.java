@@ -82,8 +82,8 @@ public class Eelistused {
             seaded.setProperty("stiil", "styles/" + stiiliValik.getText() + ".css");
             try {
                 Satted.salvestaSätted(seaded, "app.properties");
-            } catch (IOException e){
-                ErrorScreen.tooEsile("\nEelistuste salvestamisel läks midagi valesti.\n" +
+            } catch (IOException | NullPointerException e){
+                ErrorScreen.tooEsile("Eelistuste salvestamisel läks midagi valesti.\n" +
                         "Tõenäoliselt tekkis viga app.properties faili leidmisel.");
             }
         });
