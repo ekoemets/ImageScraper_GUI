@@ -27,6 +27,7 @@ public class KasutajaLiides extends Application {
         Properties eelistused = Satted.loeSätted("app.properties");
         int aknaKõrgus = Integer.parseInt(eelistused.getProperty("aken.korgus"));
         int aknaLaius = Integer.parseInt(eelistused.getProperty("aken.laius"));
+        System.out.println(eelistused.getProperty("stiil"));
         String stiil = ClassLoader.getSystemClassLoader().getResource(eelistused.getProperty("stiil")).toExternalForm();
         Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
         StyleManager.getInstance().addUserAgentStylesheet(stiil);

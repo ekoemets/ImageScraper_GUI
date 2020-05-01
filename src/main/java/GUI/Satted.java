@@ -2,9 +2,12 @@ package GUI;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Properties;
 
 public class Satted {
+    private static final String lokaalneFailiTee = ".imagescraper";
+
     public static Properties loeSätted(String nimi) throws IOException {
         File säteteFail = leiaSäteteFail(nimi);
         Properties sätted = new Properties();
@@ -25,16 +28,16 @@ public class Satted {
         }
     }
 
-    private static File leiaSäteteFail(String nimi) throws FileNotFoundException{
-        String failitee = leiaSäteteFailitee(nimi);
-        return new File(failitee);
+    private static File leiaSäteteFail(String nimi) throws IOException {
+        File failitee = new File(lokaalneFailiTee);
+        if(!failitee.exists()){
+            failitee.mkdir();
+        }
+        File fail = new File(lokaalneFailiTee + File.separator + nimi);
+        if(!fail.exists()){
+            Files.copy(ClassLoader.getSystemClassLoader().getResourceAsStream(nimi), fail.toPath());
+        }
+        return fail;
     }
 
-    public static String  leiaSäteteFailitee(String nimi) throws FileNotFoundException{
-        URL failitee = ClassLoader.getSystemClassLoader().getResource(nimi);
-        if(failitee == null){
-            throw new FileNotFoundException("Ei leidnud sätete faili \"" +  nimi + '"');
-        }
-        return failitee.getPath();
-    }
 }

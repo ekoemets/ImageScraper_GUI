@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -56,7 +57,8 @@ public class Eelistused {
         asetus.add(stiiliSilt, 0,2);
 
         // stiili valiku menüü
-        Label stiiliValik = new Label(seaded.getProperty("stiil").substring(7,11));
+        String stiil = seaded.getProperty("stiil");
+        Label stiiliValik = new Label(stiil.substring(stiil.lastIndexOf('/') + 1, stiil.lastIndexOf('.')));
         asetus.add(stiiliValik,1,2);
 
         // stiilivaliku navigeerimise nupud
@@ -77,7 +79,7 @@ public class Eelistused {
         salvestaNupp.setOnMouseClicked(mouseEvent -> {
             seaded.setProperty("aken.laius",laiusTekst.getText());
             seaded.setProperty("aken.korgus",korgusTekst.getText());
-            seaded.setProperty("stiil", "styles/" + stiiliValik.getText());
+            seaded.setProperty("stiil", "styles/" + stiiliValik.getText() + ".css");
             try {
                 Satted.salvestaSätted(seaded, "app.properties");
             } catch (IOException e){
