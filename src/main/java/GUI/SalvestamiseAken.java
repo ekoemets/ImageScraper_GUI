@@ -13,7 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -37,6 +36,7 @@ public class SalvestamiseAken {
         Button sulgeNupp = new Button("OK!");
         sulgeNupp.setOnMouseClicked(mouseEvent -> taust.close());
         // et kasutaja ei saaks poole protsessi pealt akent kinni panna
+        // PS! kui panna ristist kinni siis protsess kestab ikka edasi
         sulgeNupp.setDisable(true);
 
         BorderPane sisu = new BorderPane();

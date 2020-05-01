@@ -88,6 +88,12 @@ public class EelistusteAken {
 
         // eelistuste akna sulgemise nupp
         Button sulgeNupp = new Button("OK");
+        sulgeNupp.setOnAction(event -> {
+            System.out.println(seaded.getProperty("stiil"));
+            if (!seaded.getProperty("stiil").contains(stiiliValik.getText())){
+                vahetaStiili(stiiliValik);
+            }
+        });
         sulgeNupp.setOnMouseClicked(mouseEvent -> eelistused.close());
         asetus.add(sulgeNupp, 0,6);
 

@@ -42,7 +42,7 @@ public class InfoVaade extends BorderPane {
         VBox aadressid = new VBox(10,veebiRiba,kaustaRiba);
         this.setTop(aadressid);
 
-        ChoiceBox<String> tyybivalik = new ChoiceBox<>();
+        ComboBox<String> tyybivalik = new ComboBox<>();
         tyybivalik.getItems().addAll("class","tag","id","css (asjatundjatele)");
 
         ComboBox<String> elemendivalik = new ComboBox<>();
