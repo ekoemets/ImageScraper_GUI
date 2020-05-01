@@ -9,7 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class ErrorScreen {
+public class VeaAken {
 
     public static void tooEsile(String selgitus){
         Stage kast = new Stage();

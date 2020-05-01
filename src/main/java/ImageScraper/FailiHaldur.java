@@ -14,7 +14,7 @@ public class FailiHaldur {
      * @param kaustaTee koht salvestamiseks, eelnevalt loodud, kindlasti olemas.
      * @throws IOException kui elemenditõmmis salvestati ilma pildi informatsioonita, väljastab kirja ja jätab pildi vahele.
      */
-    static void salvestaPildid(List<Kuvatommis> pildid, String kaustaTee) throws IOException {
+    public static void salvestaPildid(List<Kuvatommis> pildid, String kaustaTee) throws IOException {
         for (Kuvatommis kuvatommis : pildid) {
             File väljundFail = new File(kaustaTee + "\\" +kuvatommis.getNimi() + ".png");
             try {

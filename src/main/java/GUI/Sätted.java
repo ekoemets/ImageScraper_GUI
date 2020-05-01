@@ -4,7 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.util.Properties;
 
-public class Satted {
+public class Sätted {
     private static final String lokaalneFailiTee = ".imagescraper";
 
     public static Properties loeSätted(String nimi) throws IOException {

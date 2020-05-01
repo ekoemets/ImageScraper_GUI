@@ -5,7 +5,6 @@ import javafx.scene.layout.Pane;
 
 public class VaateHaldur {
     private BorderPane vaade;
-    private Pane erivaade;
     private Pane[] vaated;
     private int vaateIndeks;
 
@@ -20,10 +19,6 @@ public class VaateHaldur {
     public void setVaated(Pane[] vaated) {
         this.vaated = vaated;
         muudaVaadet(vaateIndeks);
-    }
-
-    public void setErivaade(Pane erivaade){
-        this.erivaade = erivaade;
     }
 
     private void muudaVaadet(int indeks){

@@ -17,9 +17,9 @@ public class MenüüNupud extends BorderPane {
         seaded = new Button("Seaded");
         seaded.setOnMouseClicked(mouseEvent -> {
             try {
-                Eelistused.tooEsile();
+                EelistusteAken.tooEsile();
             } catch (IOException e){
-                ErrorScreen.tooEsile("Midagi läks valesti :(");
+                VeaAken.tooEsile("Midagi läks valesti :(");
             }
         });
         tagasi = new Button("Eelmine");

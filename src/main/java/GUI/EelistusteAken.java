@@ -13,10 +13,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Eelistused {
+public class EelistusteAken {
 
     public static void tooEsile() throws IOException {
-        Properties seaded = Satted.loeSätted("app.properties");
+        Properties seaded = Sätted.loeSätted("app.properties");
 
         Stage eelistused = new Stage();
         eelistused.initModality(Modality.APPLICATION_MODAL);
@@ -79,9 +79,9 @@ public class Eelistused {
             seaded.setProperty("aken.korgus",korgusTekst.getText());
             seaded.setProperty("stiil", "styles/" + stiiliValik.getText() + ".css");
             try {
-                Satted.salvestaSätted(seaded, "app.properties");
+                Sätted.salvestaSätted(seaded, "app.properties");
             } catch (IOException | NullPointerException e){
-                ErrorScreen.tooEsile("Eelistuste salvestamisel läks midagi valesti.\n" +
+                VeaAken.tooEsile("Eelistuste salvestamisel läks midagi valesti.\n" +
                         "Tõenäoliselt tekkis viga app.properties faili leidmisel.");
             }
         });

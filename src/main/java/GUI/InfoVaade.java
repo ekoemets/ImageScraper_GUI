@@ -17,6 +17,7 @@ public class InfoVaade extends BorderPane {
     private boolean tolkimineKeelatud = false;
     private final Button JARGMINE;
     private final Button EELMINE;
+    private final Label tolkimiseValik;
 
     public InfoVaade(VeebiKlient klient, Stage aken){
 
@@ -49,6 +50,10 @@ public class InfoVaade extends BorderPane {
         elemendivalik.getItems().addAll("navbar","layer","container","img","a","section","contact","parallax","navigation");
         elemendivalik.setOnAction(event -> {
             if (elemendivalik.getValue().equals("img")){
+                if (tolkimineKeelatud){
+                    lülitaTolkimine();
+                }
+            } else if (!tolkimineKeelatud){
                 lülitaTolkimine();
             }
         });
@@ -58,8 +63,10 @@ public class InfoVaade extends BorderPane {
         valikuLahter.setPadding(new Insets(20,0,0,0));
         this.setCenter(valikuLahter);
 
-        Label tolkimiseValik = new Label("Ei");
+        tolkimiseValik = new Label("Ei");
         HBox tolkimiseRiba = new HBox(10,new Label("Soovin tõlkida (eksperimentaalne, ainult \"img\" tüübil):"),tolkimiseValik);
+        tolkimiseRiba.setPadding(new Insets(0,0,20,0));
+        tolkimiseRiba.setAlignment(Pos.CENTER_LEFT);
         this.setBottom(tolkimiseRiba);
 
         // tõlkimise vahetamise nupud
@@ -72,24 +79,28 @@ public class InfoVaade extends BorderPane {
         // tegevuse nupp, et salvestaks pildid
         Button valmisNupp = new Button("Valmis!");
         valmisNupp.setOnMouseClicked(event -> {
-            if (klient.getCurrentUrl().equals("data:,") && veebileht.getText().isEmpty()){
-                ErrorScreen.tooEsile("\nPuudub veebilehe aadress!");
-                return;
+            if (veebileht.getText().isEmpty()){
+                if (klient.getCurrentUrl() == null || klient.getCurrentUrl().equals("data:,")){
+                    VeaAken.tooEsile("\nPuudub veebilehe aadress!");
+                    return;
+                }
+                else veebileht.setText(klient.getCurrentUrl());
             }
-            System.out.println(klient.getCurrentUrl());
+            else klient.get(veebileht.getText());
+
             if (kaustaTee.getText().isEmpty()){
-                ErrorScreen.tooEsile("\nPuudub kaustatee salvestamiseks!");
+                VeaAken.tooEsile("\nPuudub kaustatee salvestamiseks!");
                 return;
             }
             if (tyybivalik.getValue() == null){
-                ErrorScreen.tooEsile("\nPalun vali tüüp!");
+                VeaAken.tooEsile("\nPalun vali tüüp!");
                 return;
             }
             if (elemendivalik.getValue() == null || elemendivalik.getValue().isEmpty()){
-                ErrorScreen.tooEsile("\nPalun vali element!");
+                VeaAken.tooEsile("\nPalun vali element!");
                 return;
             }
-
+            SalvestamiseAken.tooEsile(klient,kaustaTee.getText(),tyybivalik.getValue(),elemendivalik.getValue(),!tolkimineKeelatud);
         });
         tolkimiseRiba.getChildren().addAll(EELMINE, JARGMINE,valmisNupp);
 
@@ -97,6 +108,9 @@ public class InfoVaade extends BorderPane {
 
     public void lülitaTolkimine(){
         tolkimineKeelatud = !tolkimineKeelatud;
+        if (tolkimineKeelatud && tolkimiseValik.getText().equals("Jah")){
+            tolkimiseValik.setText("Ei");
+        }
         EELMINE.setDisable(tolkimineKeelatud);
         JARGMINE.setDisable(tolkimineKeelatud);
     }

@@ -22,7 +22,7 @@ public class KasutajaLiides extends Application {
     public void start(Stage pealava) throws IOException {
 
         //Loeme eelistused sätete failist.
-        Properties eelistused = Satted.loeSätted("app.properties");
+        Properties eelistused = Sätted.loeSätted("app.properties");
         int aknaKõrgus = Integer.parseInt(eelistused.getProperty("aken.korgus"));
         int aknaLaius = Integer.parseInt(eelistused.getProperty("aken.laius"));
         String stiil = eelistused.getProperty("stiil");
