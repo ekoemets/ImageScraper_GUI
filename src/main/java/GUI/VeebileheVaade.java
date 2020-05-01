@@ -38,6 +38,7 @@ public class VeebileheVaade extends BorderPane {
         otsiNupp.setOnAction( inputEvent -> {
             if (!veebileheAadress.getText().isEmpty()) {
                 menüüNupud.lülita();
+                otsiNupp.setDisable(true);
 
                 ProgressIndicator olek = new ProgressIndicator(-1);
                 vaade.setCenter(olek);
@@ -61,7 +62,10 @@ public class VeebileheVaade extends BorderPane {
                     } catch (IOException e) {
                         Platform.runLater(() -> vaade.setCenter(new Text("Viga, proovi uuesti!")));
                     } finally {
-                        Platform.runLater(() -> menüüNupud.lülita());
+                        Platform.runLater(() -> {
+                            otsiNupp.setDisable(false);
+                            menüüNupud.lülita();
+                        });
                     }
                 });
                 veebileht.start();

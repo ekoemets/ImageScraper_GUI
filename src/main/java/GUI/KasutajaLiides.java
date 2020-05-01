@@ -62,7 +62,7 @@ public class KasutajaLiides extends Application {
 
     @Override
     public void stop(){
-        System.out.println("Stop was called");
+        //Sulgeme veebikliendi
         klient.quit();
     }
 }
