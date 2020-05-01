@@ -1,7 +1,6 @@
 package GUI;
 
 import ImageScraper.VeebiKlient;
-import com.sun.javafx.css.StyleManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -26,9 +25,8 @@ public class KasutajaLiides extends Application {
         Properties eelistused = Satted.loeSätted("app.properties");
         int aknaKõrgus = Integer.parseInt(eelistused.getProperty("aken.korgus"));
         int aknaLaius = Integer.parseInt(eelistused.getProperty("aken.laius"));
-        String stiil = ClassLoader.getSystemClassLoader().getResource(eelistused.getProperty("stiil")).toExternalForm();
-        Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
-        //StyleManager.getInstance().addUserAgentStylesheet(stiil);
+        String stiil = eelistused.getProperty("stiil");
+        Application.setUserAgentStylesheet(stiil);
 
         //Käivitame veebikliendi
         System.setProperty("webdriver.chrome.silentOutput", "true");                        // peidab kasutaja jaoks ebaolulise info
@@ -47,15 +45,11 @@ public class KasutajaLiides extends Application {
         MenüüNupud menüüNupud = new MenüüNupud(vaateHaldur);
         peaVaade.setBottom(menüüNupud);
 
-        // Infovaade
-        InfoVaade infoVaade = new InfoVaade(klient, pealava);
-
         //Vaated, mille vahel haldur vahetab
-        Pane[] vaated = new Pane[]{new VeebileheVaade(klient, menüüNupud),infoVaade};
+        Pane[] vaated = new Pane[]{new VeebileheVaade(klient, menüüNupud), new InfoVaade(klient)};
         vaateHaldur.setVaated(vaated);
 
         Scene stseen = new Scene(peaVaade, aknaKõrgus, aknaLaius);
-
         pealava.setOnCloseRequest(e -> klient.quit());
         pealava.setTitle("ImageScraper");
         pealava.setScene(stseen);

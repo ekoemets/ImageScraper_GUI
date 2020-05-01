@@ -1,6 +1,5 @@
 package GUI;
 
-import com.sun.javafx.css.StyleManager;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -11,7 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -104,10 +102,10 @@ public class Eelistused {
         Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
         if (stiiliValik.getText().equals("hele")){
             stiiliValik.setText("tume");
-            StyleManager.getInstance().addUserAgentStylesheet(ClassLoader.getSystemClassLoader().getResource("styles/tume.css").toString());
+            Application.setUserAgentStylesheet("styles/tume.css");
         } else {
             stiiliValik.setText("hele");
-            StyleManager.getInstance().addUserAgentStylesheet(ClassLoader.getSystemClassLoader().getResource("styles/hele.css").toString());
+            Application.setUserAgentStylesheet("styles/hele.css");
 
         }
     }
