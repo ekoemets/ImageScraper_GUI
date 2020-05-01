@@ -30,30 +30,3 @@ dependencies {
 application {
 	mainClassName = 'GUI.KasutajaLiides'
 }
-
-task fatJar(type: Jar) {
-    manifest {
-        attributes 'Implementation-Title': project.name,
-                'Implementation-Version': version,
-                'Main-Class': 'KasutajaLiides',
-                'Class-Path': '.'
-    }
-    baseName = project.name
-    archiveName = project.name + '.jar'
-    from sourceSets.test.output
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
-
-}
-
-task copyJar(type: Copy) {
-    from fatJar
-    into 'build/fatJar'
-}
-
-task runFinalJar(type: Exec) {
-    commandLine  'cmd','/c','start', 'cmd.exe' ,'@cmd' , '/k', 'java -Dconsole.encoding=UTF-8 -Dfile.encoding=utf-8 -jar build/fatJar' + '/' + project.name + '.jar'
-}
-
-task buildApp (dependsOn: [fatJar, copyJar])
-task buildAppAndRun (dependsOn: [fatJar, copyJar, runFinalJar])

@@ -104,7 +104,6 @@ public class EelistusteAken {
     }
 
     private static void vahetaStiili(Label stiiliValik){
-        Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
         if (stiiliValik.getText().equals("hele")){
             stiiliValik.setText("tume");
             Application.setUserAgentStylesheet("styles/tume.css");
