@@ -1,0 +1,25 @@
+.root{
+    -fx-font-size: 15px;
+    -fx-font-family: sans-serif;
+}
+
+.text-field{
+    -fx-border-color: #a3a3a3;
+    -fx-border-style: solid;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.button:armed,
+.button:hover,
+.button:focused,
+.button{
+    -fx-background-color: #007bff;
+    -fx-background-radius: 3px;
+    -fx-background-insets: 0px;
+  -fx-text-alignment: center;
+  -fx-border-style: none;
+  -fx-label-padding: 4px;
+  -fx-border-radius: 3;
+  -fx-text-fill: white;
+  -fx-font-weight: 700;
+}

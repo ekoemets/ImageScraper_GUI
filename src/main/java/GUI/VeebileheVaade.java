@@ -30,14 +30,13 @@ public class VeebileheVaade extends BorderPane {
         this.sisend = new HBox(15, veebilehtTekst, veebileheAadress, otsiNupp);
         this.sisend.setAlignment(Pos.CENTER);
 
-        Text eelvaateTekst = new Text("Eelvaade");
+        Label eelvaateTekst = new Label("Eelvaade");
 
         otsiNupp.setOnMouseClicked(mouseEvent -> {
             if (!veebileheAadress.getText().isEmpty()) {
                 menüüNupud.lülita();
 
                 ProgressIndicator olek = new ProgressIndicator(-1);
-                //Text laadimine = new Text("Laen eelvaadet.");
                 this.setCenter(olek);
                 DoubleBinding eelvaateKõrgus = (heightProperty().subtract(sisend.heightProperty())).multiply(0.9);
                 DoubleBinding eelvaateLaius = widthProperty().multiply( 0.9);
