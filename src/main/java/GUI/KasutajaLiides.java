@@ -1,12 +1,10 @@
 package GUI;
 
 import ImageScraper.VeebiKlient;
-import com.sun.javafx.css.StyleManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -27,10 +25,8 @@ public class KasutajaLiides extends Application {
         Properties eelistused = Satted.loeSätted("app.properties");
         int aknaKõrgus = Integer.parseInt(eelistused.getProperty("aken.korgus"));
         int aknaLaius = Integer.parseInt(eelistused.getProperty("aken.laius"));
-        System.out.println(eelistused.getProperty("stiil"));
-        String stiil = ClassLoader.getSystemClassLoader().getResource(eelistused.getProperty("stiil")).toExternalForm();
-        Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
-        StyleManager.getInstance().addUserAgentStylesheet(stiil);
+        String stiil = eelistused.getProperty("stiil");
+        Application.setUserAgentStylesheet(stiil);
 
         //Käivitame veebikliendi
         System.setProperty("webdriver.chrome.silentOutput", "true");                        // peidab kasutaja jaoks ebaolulise info
@@ -54,7 +50,6 @@ public class KasutajaLiides extends Application {
         vaateHaldur.setVaated(vaated);
 
         Scene stseen = new Scene(peaVaade, aknaKõrgus, aknaLaius);
-
         pealava.setOnCloseRequest(e -> klient.quit());
         pealava.setTitle("ImageScraper");
         pealava.setScene(stseen);

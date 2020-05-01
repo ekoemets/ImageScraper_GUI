@@ -1,3 +1,4 @@
+@import "com/sun/javafx/scene/control/skin/modena/modena.css"
 .root{
     -fx-font-size: 15px;
     -fx-font-family: sans-serif;
